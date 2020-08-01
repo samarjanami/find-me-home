@@ -13,6 +13,6 @@ public class ViewController {
 
     @GetMapping("/")
     public String getSearchResults(Model model){
-        return "/index";
+        return "index";
     }
 }
