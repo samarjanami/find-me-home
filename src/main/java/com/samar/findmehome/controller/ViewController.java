@@ -15,4 +15,9 @@ public class ViewController {
     public String getSearchResults(Model model){
         return "index";
     }
+
+    @GetMapping("/property-single.html")
+    public String getPropertyDetails(Model model){
+        return "property-single";
+    }
 }
