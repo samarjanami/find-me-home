@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewController {
 
-    @GetMapping("/")
+    @GetMapping(value = {"/" , "/index.html"})
     public String getSearchResults(Model model){
         return "index";
     }
@@ -20,4 +20,5 @@ public class ViewController {
     public String getPropertyDetails(Model model){
         return "property-single";
     }
+
 }
