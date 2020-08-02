@@ -41,6 +41,13 @@ public class ViewController {
                 " min price = " + minPrice +
                 " max price = " + maxPrice);
 
+        //TODO Validating the input parameters
+
+        //Call service and set model
+        model.addAttribute("properties", service.getProperties());
+
+        //TODO update view
+
         return "search";
     }
 

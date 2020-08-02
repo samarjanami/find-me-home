@@ -2,6 +2,7 @@ package com.samar.findmehome;
 
 import com.samar.findmehome.service.PropertyApiService;
 import com.samar.findmehome.service.model.Property;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -9,13 +10,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by Samar J on 8/1/2020.
@@ -32,11 +34,32 @@ public class FindmehomeApplicationTest {
     @Test
     public void somthing() throws Exception{
         List<Property> propertyList = new ArrayList<>();
-        propertyList.add(new Property());
+        propertyList.add(new Property("12 30th st, some address", 280000,
+                2, 1, "condo",
+                "this is the short description", 1200, 1550,
+                Collections.singletonList("photo url"), 1, 1960));
+
 
         when(service.getProperties()).thenReturn(propertyList);
         this.mockMvc.perform(post("/search").param("location", "Los Angeles"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("search")));
+                .andExpect(content().string(containsString("search")))
+                .andExpect(model().attribute("properties", Matchers.hasSize(propertyList.size())))
+                .andExpect(model().attribute("properties", Matchers.hasItem(
+                        allOf(
+                                hasProperty("address", is("12 30th st, some address")),
+                                hasProperty("price", is(280000)),
+                                hasProperty("numberOfBedrooms", is(2)),
+                                hasProperty("numberOfBathrooms", is(1)),
+                                hasProperty("propertyType", is("condo")),
+                                hasProperty("description", is("this is the short description")),
+                                hasProperty("floorArea", is(1200)),
+                                hasProperty("lotArea", is(1550)),
+                                hasProperty("numberOfParking", is(1)),
+                                hasProperty("yearBuilt", is(1960)),
+                                hasProperty("pictures", hasItem("photo url"))
+                        )
+                )));
+
     }
 }
