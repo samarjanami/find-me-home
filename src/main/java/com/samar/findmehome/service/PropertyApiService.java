@@ -9,5 +9,5 @@ import java.util.List;
  */
 
 public interface PropertyApiService {
-    List<Property> getProperties();
+    List<Property> getProperties(int postalCode, String propertyType, Integer minBed, Integer minBath, Integer minPrice, Integer maxPrice);
 }

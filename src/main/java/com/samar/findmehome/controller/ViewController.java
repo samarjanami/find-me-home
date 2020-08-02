@@ -44,7 +44,7 @@ public class ViewController {
         //TODO Validating the input parameters
 
         //Call service and set model
-        model.addAttribute("properties", service.getProperties());
+        model.addAttribute("properties", service.getProperties(90025, propertyType, minBed, minBath, minPrice, maxPrice));
 
         //TODO update view
 
