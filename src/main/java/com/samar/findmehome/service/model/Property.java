@@ -1,5 +1,7 @@
 package com.samar.findmehome.service.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 /**
@@ -7,19 +9,33 @@ import java.util.List;
  */
 
 public class Property {
+    @JsonProperty("UnparsedAddress")
     private String address;
+    @JsonProperty("ListPrice")
     private int price;
+    @JsonProperty("BedroomsTotal")
     private int numberOfBedrooms;
+    @JsonProperty("BathroomsTotalInteger")
     private int numberOfBathrooms;
+    @JsonProperty("PropertySubType")
     private String propertyType;
+    @JsonProperty("PublicRemarks")
     private String description;
+    @JsonProperty("LivingArea")
     private int floorArea;
+    @JsonProperty("LotSizeSquareFeet")
     private int lotArea;
-    private List<String> pictures;
+    @JsonProperty("GarageSpaces")
     private int numberOfParking;
+    @JsonProperty("YearBuilt")
     private int yearBuilt;
+    @JsonProperty("ListingKey")
+    private String listingKey;
+    @JsonProperty("Media")
+    private List<Media> pictures;
 
-    public Property(String address, int price, int numberOfBedrooms, int numberOfBathrooms, String propertyType, String description, int floorArea, int lotArea, List<String> pictures, int numberOfParking, int yearBuilt) {
+    public Property(){}
+    public Property(String address, int price, int numberOfBedrooms, int numberOfBathrooms, String propertyType, String description, int floorArea, int lotArea, List<Media> pictures, int numberOfParking, int yearBuilt) {
 
         this.address = address;
         this.price = price;
@@ -32,6 +48,32 @@ public class Property {
         this.pictures = pictures;
         this.numberOfParking = numberOfParking;
         this.yearBuilt = yearBuilt;
+    }
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "address='" + address + '\'' +
+                ", price=" + price +
+                ", numberOfBedrooms=" + numberOfBedrooms +
+                ", numberOfBathrooms=" + numberOfBathrooms +
+                ", propertyType='" + propertyType + '\'' +
+                ", description='" + description + '\'' +
+                ", floorArea=" + floorArea +
+                ", lotArea=" + lotArea +
+                ", numberOfParking=" + numberOfParking +
+                ", yearBuilt=" + yearBuilt +
+                ", listingKey='" + listingKey + '\'' +
+                ", pictures=" + pictures +
+                '}';
+    }
+
+    public String getListingKey() {
+        return listingKey;
+    }
+
+    public void setListingKey(String listingKey) {
+        this.listingKey = listingKey;
     }
 
     public String getAddress() {
@@ -98,11 +140,11 @@ public class Property {
         this.lotArea = lotArea;
     }
 
-    public List<String> getPictures() {
+    public List<Media> getPictures() {
         return pictures;
     }
 
-    public void setPictures(List<String> pictures) {
+    public void setPictures(List<Media> pictures) {
         this.pictures = pictures;
     }
 
