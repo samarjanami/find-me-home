@@ -1,13 +1,13 @@
 package com.samar.findmehome.service;
 
 import com.samar.findmehome.service.model.Property;
-
-import java.util.List;
+import com.samar.findmehome.service.model.PropertiesResponse;
 
 /**
  * Created by Samar J on 8/1/2020.
  */
 
 public interface PropertyApiService {
-    List<Property> getProperties(int postalCode, String propertyType, Integer minBed, Integer minBath, Integer minPrice, Integer maxPrice);
+    PropertiesResponse getPropertiesResponse(int postalCode, String propertyType, Integer minBed, Integer minBath, Integer minPrice, Integer maxPrice, Integer numberOfListingInAPage, Integer pageNumber);
+    Property getPropertyInfo(String listingKey);
 }
