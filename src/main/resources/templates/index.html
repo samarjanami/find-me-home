@@ -48,7 +48,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 search-wrap">
-                <form action="/search" method="post" class="search-property">
+                <form th:action="@{/search}" method="post" class="search-property" th:object="${criteria}"
+                      modelAttribute="criteria">
+                    <input type="hidden" th:value="9" th:attr="name='numberOfListingInAPage'" >
+                    <input type="hidden" th:value="1" th:attr="name='currentPageNumber'">
                     <div class="row">
                         <div class="col-md align-items-end">
                             <div class="form-group">
@@ -56,7 +59,7 @@
                                 <div class="form-field">
                                     <div class="icon"><span class="icon-my_location"></span></div>
                                     <input type="text" name="location" id="location-id" class="form-control"
-                                           placeholder="City/Locality Name">
+                                           placeholder="City/Zip code" th:field="*{location}">
                                 </div>
                             </div>
                         </div>
@@ -66,13 +69,14 @@
                                 <div class="form-field">
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="property-types" id="property-type-id" class="form-control">
+                                        <select name="property-types" id="property-type-id" class="form-control"
+                                                th:field="*{propertyType}">
                                             <option value="">Type</option>
-                                            <option value="single-family">Single family</option>
-                                            <option value="townhouse">Townhouse</option>
-                                            <option value="condo">Condominium</option>
-                                            <option value="apartment">Apartment</option>
-                                            <option value="duplex">Duplex</option>
+                                            <option value="Single Family Residence">Single Family</option>
+                                            <option value="Townhouse">Townhouse</option>
+                                            <option value="Condominium">Condominium</option>
+                                            <option value="Apartment">Apartment</option>
+                                            <option value="Duplex">Duplex</option>
                                         </select>
                                     </div>
                                 </div>
@@ -86,7 +90,8 @@
                                 <div class="form-field">
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="min-bed" id="min-bed-id" class="form-control">
+                                        <select name="min-bed" id="min-bed-id" class="form-control"
+                                                th:field="*{minBed}">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -103,7 +108,8 @@
                                 <div class="form-field">
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="min-bath" id="min-bath-id" class="form-control">
+                                        <select name="min-bath" id="min-bath-id" class="form-control"
+                                                th:field="*{minBath}">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -120,7 +126,8 @@
                                 <div class="form-field">
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="min-price" id="min-price-id" class="form-control">
+                                        <select name="min-price" id="min-price-id" class="form-control"
+                                                th:field="*{minPrice}">
                                             <option value="0">Min Price</option>
                                             <option value="1000">$1,000</option>
                                             <option value="5000">$5,000</option>
@@ -147,7 +154,8 @@
                                 <div class="form-field">
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="max-price" id="max-price-id" class="form-control">
+                                        <select name="max-price" id="max-price-id" class="form-control"
+                                                th:field="*{maxPrice}">
                                             <option value="100000000">Max Price</option>
                                             <option value="5000">$5,000</option>
                                             <option value="10000">$10,000</option>
@@ -182,289 +190,6 @@
     </div>
 </section>
 
-
-<section class="ftco-section bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 ftco-animate">
-                <div class="properties">
-                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center"
-                       style="background-image: url(images/properties-1.jpg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <span class="status sale">Sale</span>
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                <p>Apartment</p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$20,000</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                            <span><i class="flaticon-bed"></i> 4</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="properties">
-                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center"
-                       style="background-image: url(images/properties-2.jpg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <span class="status sale">Sale</span>
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                <p>Apartment</p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$20,000</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                            <span><i class="flaticon-bed"></i> 4</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="properties">
-                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center"
-                       style="background-image: url(images/properties-3.jpg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <span class="status rent">Rent</span>
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                <p>Apartment</p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$800 <small>/ month</small></span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                            <span><i class="flaticon-bed"></i> 4</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="properties">
-                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center"
-                       style="background-image: url(images/properties-4.jpg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <span class="status sale">Sale</span>
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                <p>Apartment</p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$20,000</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                            <span><i class="flaticon-bed"></i> 4</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="properties">
-                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center"
-                       style="background-image: url(images/properties-5.jpg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <span class="status sale">Sale</span>
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                <p>Apartment</p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$20,000</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                            <span><i class="flaticon-bed"></i> 4</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="properties">
-                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center"
-                       style="background-image: url(images/properties-6.jpg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <span class="status sale">Sale</span>
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                <p>Apartment</p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$20,000</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                            <span><i class="flaticon-bed"></i> 4</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="properties">
-                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center"
-                       style="background-image: url(images/properties-7.jpg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <span class="status rent">Rent</span>
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                <p>Apartment</p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$899 <small>/ month</small></span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                            <span><i class="flaticon-bed"></i> 4</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="properties">
-                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center"
-                       style="background-image: url(images/properties-8.jpg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <span class="status sale">Sale</span>
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                <p>Apartment</p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$20,000</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                            <span><i class="flaticon-bed"></i> 4</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="properties">
-                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center"
-                       style="background-image: url(images/properties-9.jpg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <span class="status sale">Sale</span>
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                <p>Apartment</p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$20,000</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                            <span><i class="flaticon-bed"></i> 4</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col text-center">
-                <div class="block-27">
-                    <ul>
-                        <li><a href="#">&lt;</a></li>
-                        <li class="active"><span>1</span></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&gt;</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <footer class="ftco-footer ftco-bg-dark ftco-section">
 

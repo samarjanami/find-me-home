@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Samar J on 8/1/2020.
  */
 
-public class PropertyResponse {
+public class PropertiesResponse {
     @JsonProperty("@odata.count")
     private int count;
     @JsonProperty("value")
