@@ -192,10 +192,10 @@
     </div>
 </section>
 
-
 <section class="ftco-section bg-light">
     <div class="container">
         <div class="row">
+            <p class="text p-3" th:text="${error}"></p>
             <div class="col-md-4 ftco-animate" th:each="property: ${properties}">
                 <div class="properties">
                     <a th:href="@{'/property?key=' + ${property.listingKey}}"
@@ -214,18 +214,21 @@
                                 <p th:text="${property.propertyType}"></p>
                             </div>
                             <div class="two">
-                                <span class="price" th:text="'$' + ${property.price}"></span>
+                                <span class="price" th:text="'$' + ${#numbers.formatDecimal(property.price, 0, 'COMMA', 0, 'POINT')}" ></span>
                             </div>
                         </div>
                         <p th:text="${property.pictures[0].shortDescription}"></p>
                         <hr>
                         <p class="bottom-area d-flex">
-                            <i class="flaticon-selection"></i>
-                            <span th:text="${property.floorArea} + ' sqft'"> </span>
-                            <i class="ml-auto flaticon-bathtub"></i>
-                            <span class="ml-auto" th:text=" ${property.numberOfBathrooms}"> </span>
-                            </span> <i class="flaticon-bed"></i>
-                            <span th:text="${property.numberOfBedrooms}"> </span>
+                            <span>
+                                <i class="flaticon-selection"> </i><span th:text="${#numbers.formatDecimal(property.floorArea, 0, 'COMMA', 0, 'POINT')} + ' sqft'"></span>
+                            </span>
+                            <span class="ml-auto">
+                                <i class="ml-auto flaticon-bathtub"></i><span th:text=" ${property.numberOfBathrooms}"></span>
+                            </span>
+                            <span >
+                                <i class="flaticon-bed"></i><span th:text="${property.numberOfBedrooms}"></span>
+                            </span>
                         </p>
                     </div>
                 </div>
@@ -274,19 +277,7 @@
 </section>
 
 <footer class="ftco-footer ftco-bg-dark ftco-section">
-
 </footer>
-
-
-<!-- loader -->
-<div id="ftco-loader" class="show fullscreen">
-    <svg class="circular" width="48px" height="48px">
-        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
-        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-                stroke="#F96D00"/>
-    </svg>
-</div>
-
 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>

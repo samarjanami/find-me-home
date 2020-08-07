@@ -31,31 +31,79 @@ public class ViewController {
     @RequestMapping(value = "/search", method = {RequestMethod.GET, RequestMethod.POST})
     public String getSearchResults(@ModelAttribute("criteria") SearchCriteria criteria, Model model) {
 
-        //Validating the input parameters
         if (isValid(criteria)) {
-            logger.info("Location = " + criteria);
+            logger.info("criteria = " + criteria);
 
             PropertiesResponse response = service.getPropertiesResponse(criteria);
 
-            if ( response != null && response.getCount() != 0) {
+            if (response != null && response.getCount() != 0) {
                 model.addAttribute("properties", response.getProperties());
                 model.addAttribute("pages", (response.getCount() / criteria.getNumberOfListingInAPage()) + 1);
+            } else {
+                model.addAttribute("error", "No results found!");
             }
+        } else {
+            model.addAttribute("error", "Invalid input. Please try again!");
         }
-        //TODO error message for else
         return "search";
-    }
-
-    private boolean isValid(SearchCriteria criteria) {
-        return true;
     }
 
     @GetMapping("/property")
     public String getPropertyDetails(@RequestParam("key") String listingKey, Model model) {
-
         model.addAttribute("property", service.getPropertyInfo(listingKey));
         return "property";
     }
 
+    private boolean isValid(SearchCriteria criteria) {
+        if (!isValidZipCode(criteria.getLocation())) {
+            return false;
+        }
+        if (criteria.getPageNumber() == null || criteria.getNumberOfListingInAPage() == null) {
+            return false;
+        }
+        if (criteria.getMinBed() < 0 || criteria.getMinBed() > 5) {
+            return false;
+        }
+        if (criteria.getMinBath() < 0 || criteria.getMinBath() > 5) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidZipCode(CharSequence zipCode) {
+        String[] patterns = {"#####", "#####-####"};
+        try {
+            for (String pattern : patterns) {
+                if (checkAgainstPattern(zipCode, pattern)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (NullPointerException ignored) {
+            return false;
+        }
+    }
+
+    private boolean checkAgainstPattern(CharSequence zipCode, CharSequence pattern) {
+        if (zipCode.length() != pattern.length()) {
+            return false;
+        }
+        for (int i = 0; i < pattern.length(); i++) {
+            char c = zipCode.charAt(i);
+            switch (pattern.charAt(i)) {
+                case '#':
+                    if (!Character.isDigit(c)) {
+                        return false;
+                    }
+                    break;
+
+                default:
+                    if (c != pattern.charAt(i)) {
+                        return false;
+                    }
+            }
+        }
+        return true;
+    }
 
 }
