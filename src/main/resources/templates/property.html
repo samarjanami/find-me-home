@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
@@ -34,19 +33,16 @@
     </div>
 </div>
 
-
 <div class="hero-wrap" style="background-image: url('images/bg_1.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <!--            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a href="blog.html">Blog</a></span> <span>Property Single</span></p>-->
                 <h1 class="mb-3 bread">Property details</h1>
             </div>
         </div>
     </div>
 </div>
-
 
 <section class="ftco-section">
     <div class="container">
@@ -61,40 +57,33 @@
                         </div>
                     </div>
                     <div class="col-md-12 Properties-single mt-4 mb-5 ftco-animate">
-                        <h2 th:text="${#numbers.formatCurrency(property.price)}" ></h2>
-                        <p class="rate mb-4">
-                            <span class="loc"><a href="#" th:text="${property.address}"><i class="icon-map"></i> </a></span>
-                        </p>
+                        <h4 th:text="${property.address}"> </h4>
                         <p th:text="${property.description}"></p>
-                        <div class="d-md-flex mt-5 mb-5">
-                            <ul>
-                                <li th:text="'Property Type: ' + ${property.propertyType}"></li>
-                                <li th:text="'Lot Area: ' + ${property.lotArea} + ' SQ FT'"></li>
-                                <li th:text="'Bed Rooms: ' + ${property.numberOfBedrooms}"></li>
-                                <li th:text="'Bath Rooms: ' + ${property.numberOfBathrooms}"></li>
-                            </ul>
-                            <ul class="ml-md-5">
-                                <li th:text="'Listing Price: ' + ${property.price}"></li>
-                                <li th:text="'Floor Area: ' + ${property.lotArea} + ' SQ FT'"></li>
-                                <li th:text="'Year Built: ' + ${property.yearBuilt}"></li>
-                                <li th:text="'Garage: ' + ${property.numberOfParking}"></li>
-
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div> <!-- .col-md-8 -->
+            <div class="col-lg-4 sidebar ftco-animate">
+                <h2 th:text="'Listing Price: $' + ${#numbers.formatDecimal(property.price, 0, 'COMMA', 0, 'POINT')}" ></h2>
+                <div class="d-md-flex mt-5 mb-5">
+                    <ul>
+                        <li th:text="'Property Type: ' + ${property.propertyType}"></li>
+                        <li th:text="'Lot Area: ' + ${#numbers.formatDecimal(property.lotArea, 0, 'COMMA', 0, 'POINT')} + ' SQ FT'"></li>
+                        <li th:text="'Bed Rooms: ' + ${property.numberOfBedrooms}"></li>
+                        <li th:text="'Bath Rooms: ' + ${property.numberOfBathrooms}"></li>
+<!--                        <li th:text="'Listing Price: $' + ${#numbers.formatDecimal(property.price, 0, 'COMMA', 0, 'POINT')}"></li>-->
+                        <li th:text="'Floor Area: ' + ${#numbers.formatDecimal(property.floorArea, 0, 'COMMA', 0, 'POINT')} + ' SQ FT'"></li>
+                        <li th:text="'Year Built: ' + ${property.yearBuilt}"></li>
+                        <li th:text="'Garage: ' + ${property.numberOfParking}"></li>
+
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section> <!-- .section -->
+
 <footer class="ftco-footer ftco-bg-dark ftco-section">
 </footer>
-
-
-
-<!-- loader -->
-<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>

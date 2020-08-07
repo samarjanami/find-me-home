@@ -14,27 +14,6 @@ public class SearchCriteria {
     private Integer maxPrice;
     private Integer numberOfListingInAPage;
     private Integer pageNumber;
-/*
-    public SearchCriteria(){
-        this.location = null;
-        this.propertyType = null;
-        this.minBed = 1;
-        this.minBath = 1;
-        this.minPrice = 0;
-        this.maxPrice = 10000000;
-        this.numberOfListingInAPage = 9;
-        this.pageNumber = 1;
-    }
-    public SearchCriteria(String location, String propertyType, Integer minBed, Integer minBath, Integer minPrice, Integer maxPrice, Integer numberOfListingInAPage, Integer pageNumber) {
-        this.location = location;
-        this.propertyType = propertyType;
-        this.minBed = minBed;
-        this.minBath = minBath;
-        this.minPrice = minPrice;
-        this.maxPrice = maxPrice;
-        this.numberOfListingInAPage = numberOfListingInAPage;
-        this.pageNumber = pageNumber;
-    }*/
 
     @Override
     public String toString() {

@@ -49,7 +49,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 search-wrap">
-                <form name="searchForm" th:action="@{/search}" method="post"  class="search-property" th:object="${criteria}"
+                <form name="searchForm" th:action="@{/search}" method="post" class="search-property"
+                      th:object="${criteria}"
                       modelAttribute="criteria" onsubmit="return validateForm()">
                     <input type="hidden" th:value="9" th:attr="name='numberOfListingInAPage'">
                     <input type="hidden" th:value="1" th:attr="name='pageNumber'">
@@ -192,21 +193,8 @@
     </div>
 </section>
 
-
 <footer class="ftco-footer ftco-bg-dark ftco-section">
-
 </footer>
-
-
-<!-- loader -->
-<div id="ftco-loader" class="show fullscreen">
-    <svg class="circular" width="48px" height="48px">
-        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
-        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-                stroke="#F96D00"/>
-    </svg>
-</div>
-
 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
