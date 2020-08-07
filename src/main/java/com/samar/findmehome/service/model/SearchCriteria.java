@@ -13,7 +13,7 @@ public class SearchCriteria {
     private Integer minPrice;
     private Integer maxPrice;
     private Integer numberOfListingInAPage;
-    private Integer currentPageNumber;
+    private Integer pageNumber;
 /*
     public SearchCriteria(){
         this.location = null;
@@ -23,9 +23,9 @@ public class SearchCriteria {
         this.minPrice = 0;
         this.maxPrice = 10000000;
         this.numberOfListingInAPage = 9;
-        this.currentPageNumber = 1;
+        this.pageNumber = 1;
     }
-    public SearchCriteria(String location, String propertyType, Integer minBed, Integer minBath, Integer minPrice, Integer maxPrice, Integer numberOfListingInAPage, Integer currentPageNumber) {
+    public SearchCriteria(String location, String propertyType, Integer minBed, Integer minBath, Integer minPrice, Integer maxPrice, Integer numberOfListingInAPage, Integer pageNumber) {
         this.location = location;
         this.propertyType = propertyType;
         this.minBed = minBed;
@@ -33,8 +33,22 @@ public class SearchCriteria {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
         this.numberOfListingInAPage = numberOfListingInAPage;
-        this.currentPageNumber = currentPageNumber;
+        this.pageNumber = pageNumber;
     }*/
+
+    @Override
+    public String toString() {
+        return "SearchCriteria{" +
+                "location='" + location + '\'' +
+                ", propertyType='" + propertyType + '\'' +
+                ", minBed=" + minBed +
+                ", minBath=" + minBath +
+                ", minPrice=" + minPrice +
+                ", maxPrice=" + maxPrice +
+                ", numberOfListingInAPage=" + numberOfListingInAPage +
+                ", pageNumber=" + pageNumber +
+                '}';
+    }
 
     public Integer getNumberOfListingInAPage() {
         return numberOfListingInAPage;
@@ -44,12 +58,12 @@ public class SearchCriteria {
         this.numberOfListingInAPage = numberOfListingInAPage;
     }
 
-    public Integer getCurrentPageNumber() {
-        return currentPageNumber;
+    public Integer getPageNumber() {
+        return pageNumber;
     }
 
-    public void setCurrentPageNumber(Integer currentPageNumber) {
-        this.currentPageNumber = currentPageNumber;
+    public void setPageNumber(Integer pageNumber) {
+        this.pageNumber = pageNumber;
     }
 
     public String getLocation() {

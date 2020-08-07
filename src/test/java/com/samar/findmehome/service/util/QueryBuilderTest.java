@@ -20,7 +20,7 @@ class QueryBuilderTest {
     void generate() {
         String queryTest;
         QueryBuilder queryBuilder = new QueryBuilder();
-        queryTest = queryBuilder.generate(95314, "Single Family Residence", 1, 1, 2000, 600000);
+        queryTest = queryBuilder.generate("95314", "Single Family Residence", 1, 1, 2000, 600000);
 
         assertEquals("contains(PostalCode,'95314') and PropertySubType eq 'Single Family Residence' and BedroomsTotal ge 1 and BathroomsFull ge 1 and ListPrice ge 2000 and ListPrice le 600000", queryTest);
     }
