@@ -21,10 +21,11 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/javascript" src="js/validation.js"></script>
 </head>
 <body>
 <div class="top">
@@ -48,10 +49,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 search-wrap">
-                <form th:action="@{/search}" method="post" class="search-property" th:object="${criteria}"
-                      modelAttribute="criteria">
-                    <input type="hidden" th:value="9" th:attr="name='numberOfListingInAPage'" >
-                    <input type="hidden" th:value="1" th:attr="name='currentPageNumber'">
+                <form name="searchForm" th:action="@{/search}" method="post" class="search-property" th:object="${criteria}"
+                      modelAttribute="criteria" onsubmit="return validateForm()">
+                    <input type="hidden" th:value="9" th:attr="name='numberOfListingInAPage'">
+                    <input type="hidden" th:value="1" th:attr="name='pageNumber'">
                     <div class="row">
                         <div class="col-md align-items-end">
                             <div class="form-group">
@@ -59,8 +60,9 @@
                                 <div class="form-field">
                                     <div class="icon"><span class="icon-my_location"></span></div>
                                     <input type="text" name="location" id="location-id" class="form-control"
-                                           placeholder="City/Zip code" th:field="*{location}">
+                                           placeholder="Zip code" th:field="*{location}">
                                 </div>
+                                <p id="zipcode-error"></p>
                             </div>
                         </div>
                         <div class="col-md align-items-end">
@@ -232,13 +234,38 @@
         <div class="row mt-5">
             <div class="col text-center">
                 <div class="block-27">
-                    <ul>
-                        <li th:if="${criteria.currentPageNumber > 1}"><a href="#">&lt;</a></li>
+                    <ul th:if="${pages != null}">
+                        <li th:if="${criteria.pageNumber > 1}">
+                            <a th:href="@{'/search?location=' + ${criteria.location}
+                            + '&propertyType=' + ${criteria.propertyType}
+                            + '&minBed=' + ${criteria.minBed}
+                            + '&minBath=' + ${criteria.minBath}
+                            + '&minPrice=' + ${criteria.minPrice}
+                            + '&maxPrice=' + ${criteria.maxPrice}
+                            + '&numberOfListingInAPage=' + ${criteria.numberOfListingInAPage}
+                            + '&pageNumber=' + ${criteria.pageNumber-1}}">&lt;</a></li>
                         <th:block th:each="i: ${#numbers.sequence(1, pages)}">
-                            <li th:if="${i == criteria.currentPageNumber}" class="active"><a href="#" th:text="${i}"></a></li>
-                            <li th:unless="${i == criteria.currentPageNumber}"><a href="#" th:text="${i}"></a></li>
+                            <li th:if="${i == criteria.pageNumber}" class="active">
+                                <a href="" th:text="${i}"></a></li>
+                            <li th:unless="${i == criteria.pageNumber}">
+                                <a th:href="@{'/search?location=' + ${criteria.location}
+                            + '&propertyType=' + ${criteria.propertyType}
+                            + '&minBed=' + ${criteria.minBed}
+                            + '&minBath=' + ${criteria.minBath}
+                            + '&minPrice=' + ${criteria.minPrice}
+                            + '&maxPrice=' + ${criteria.maxPrice}
+                            + '&numberOfListingInAPage=' + ${criteria.numberOfListingInAPage}
+                            + '&pageNumber=' + ${i}}" th:text="${i}"></a></li>
                         </th:block>
-                        <li th:if="${criteria.currentPageNumber < pages}"><a href="#">&gt;</a></li>
+                        <li th:if="${criteria.pageNumber < pages}">
+                            <a th:href="@{'/search?location=' + ${criteria.location}
+                            + '&propertyType=' + ${criteria.propertyType}
+                            + '&minBed=' + ${criteria.minBed}
+                            + '&minBath=' + ${criteria.minBath}
+                            + '&minPrice=' + ${criteria.minPrice}
+                            + '&maxPrice=' + ${criteria.maxPrice}
+                            + '&numberOfListingInAPage=' + ${criteria.numberOfListingInAPage}
+                            + '&pageNumber=' + ${criteria.pageNumber+1}}">&gt;</a></li>
                     </ul>
                 </div>
             </div>
