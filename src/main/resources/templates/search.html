@@ -194,8 +194,8 @@
 
 <section class="ftco-section bg-light">
     <div class="container">
+        <p class="text p-3" th:text="${error}"></p>
         <div class="row">
-            <p class="text p-3" th:text="${error}"></p>
             <div class="col-md-4 ftco-animate" th:each="property: ${properties}">
                 <div class="properties">
                     <a th:href="@{'/property?key=' + ${property.listingKey}}"
