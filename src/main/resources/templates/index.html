@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Find Me Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/javascript" src="js/validation.js"></script>
+</head>
+<body>
+<div class="top">
+    <div class="container">
+        <a class="navbar-brand" href="index">Find Me <span>home</span></a>
+    </div>
+</div>
+
+<div class="hero-wrap" style="background-image: url('images/bg_1.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <h1 class="mb-3 bread">Property</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-search">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 search-wrap">
+                <form name="searchForm" th:action="@{/search}" method="post" class="search-property"
+                      th:object="${criteria}"
+                      modelAttribute="criteria" onsubmit="return validateForm()">
+                    <input type="hidden" th:value="9" th:attr="name='numberOfListingInAPage'">
+                    <input type="hidden" th:value="1" th:attr="name='pageNumber'">
+                    <div class="row">
+                        <div class="col-md align-items-end">
+                            <div class="form-group">
+                                <label for="location-id">Location</label>
+                                <div class="form-field">
+                                    <div class="icon"><span class="icon-my_location"></span></div>
+                                    <input type="text" name="location" id="location-id" class="form-control"
+                                           placeholder="Zip code" th:field="*{location}">
+                                </div>
+                                <p id="zipcode-error"></p>
+                            </div>
+                        </div>
+                        <div class="col-md align-items-end">
+                            <div class="form-group">
+                                <label for="property-type-id">Property Type</label>
+                                <div class="form-field">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="property-types" id="property-type-id" class="form-control"
+                                                th:field="*{propertyType}">
+                                            <option value="">Type</option>
+                                            <option value="Single Family Residence">Single Family</option>
+                                            <option value="Townhouse">Townhouse</option>
+                                            <option value="Condominium">Condominium</option>
+                                            <option value="Apartment">Apartment</option>
+                                            <option value="Duplex">Duplex</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md align-items-end">
+                            <div class="form-group">
+                                <label for="min-bed-id">Min Beds</label>
+                                <div class="form-field">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="min-bed" id="min-bed-id" class="form-control"
+                                                th:field="*{minBed}">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md align-items-end">
+                            <div class="form-group">
+                                <label for="min-bath-id">Min Bathroom</label>
+                                <div class="form-field">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="min-bath" id="min-bath-id" class="form-control"
+                                                th:field="*{minBath}">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md align-items-end">
+                            <div class="form-group">
+                                <label for="min-price-id">Min Price</label>
+                                <div class="form-field">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="min-price" id="min-price-id" class="form-control"
+                                                th:field="*{minPrice}">
+                                            <option value="0">Min Price</option>
+                                            <option value="1000">$1,000</option>
+                                            <option value="5000">$5,000</option>
+                                            <option value="10000">$10,000</option>
+                                            <option value="50000">$50,000</option>
+                                            <option value="100000">$100,000</option>
+                                            <option value="200000">$200,000</option>
+                                            <option value="300000">$300,000</option>
+                                            <option value="400000">$400,000</option>
+                                            <option value="500000">$500,000</option>
+                                            <option value="600000">$600,000</option>
+                                            <option value="700000">$700,000</option>
+                                            <option value="800000">$800,000</option>
+                                            <option value="900000">$900,000</option>
+                                            <option value="1000000">$1,000,000</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md align-items-end">
+                            <div class="form-group">
+                                <label for="max-price-id">Max Price</label>
+                                <div class="form-field">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="max-price" id="max-price-id" class="form-control"
+                                                th:field="*{maxPrice}">
+                                            <option value="100000000">Max Price</option>
+                                            <option value="5000">$5,000</option>
+                                            <option value="10000">$10,000</option>
+                                            <option value="50000">$50,000</option>
+                                            <option value="100000">$100,000</option>
+                                            <option value="200000">$200,000</option>
+                                            <option value="300000">$300,000</option>
+                                            <option value="400000">$400,000</option>
+                                            <option value="500000">$500,000</option>
+                                            <option value="600000">$600,000</option>
+                                            <option value="700000">$700,000</option>
+                                            <option value="800000">$800,000</option>
+                                            <option value="900000">$900,000</option>
+                                            <option value="1000000">$1,000,000</option>
+                                            <option value="2000000">$2,000,000</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md align-self-end">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <input type="submit" value="Search" class="form-control btn btn-primary">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="ftco-footer ftco-bg-dark ftco-section">
+</footer>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/jquery.timepicker.min.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="js/google-map.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
