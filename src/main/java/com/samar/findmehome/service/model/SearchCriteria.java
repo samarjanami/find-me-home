@@ -12,8 +12,8 @@ public class SearchCriteria {
     private Integer minBath;
     private Integer minPrice;
     private Integer maxPrice;
-    private Integer numberOfListingInAPage;
-    private Integer pageNumber;
+    private Integer numberOfListingInAPage = 9;
+    private Integer pageNumber = 1;
 
     @Override
     public String toString() {
