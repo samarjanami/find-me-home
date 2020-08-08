@@ -2,8 +2,10 @@ package com.samar.findmehome.service;
 
 import com.samar.findmehome.service.model.Property;
 import com.samar.findmehome.service.model.PropertiesResponse;
+import com.samar.findmehome.service.model.SearchCriteria;
 import com.samar.findmehome.service.util.QueryBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -23,16 +25,18 @@ public class ResoService implements PropertyApiService {
     }
 
     @Override
-    public PropertiesResponse getPropertiesResponse(int postalCode, String propertyType, Integer minBed, Integer minBath,
-                                                    Integer minPrice, Integer maxPrice, Integer numberOfListingInAPage, Integer pageNumber) {
-        //TODO handle errors
+    public PropertiesResponse getPropertiesResponse(SearchCriteria criteria) {
 
-        String query = new QueryBuilder().generate(postalCode, propertyType, minBed, minBath, minPrice, maxPrice);
-        int skip = pageNumber * numberOfListingInAPage;
+        String query = new QueryBuilder().generate(criteria.getLocation(), criteria.getPropertyType(),
+                criteria.getMinBed(), criteria.getMinBath(), criteria.getMinPrice(), criteria.getMaxPrice());
+
+        int skip = (criteria.getPageNumber() - 1) * criteria.getNumberOfListingInAPage();
+        int numberOfListings = criteria.getNumberOfListingInAPage();
+
         PropertiesResponse response = webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/Property")
                         .queryParam("$skip", skip)
-                        .queryParam("$top", numberOfListingInAPage)
+                        .queryParam("$top", numberOfListings)
                         .queryParam("$filter", query)
                         .build())
                 .retrieve()
@@ -42,8 +46,8 @@ public class ResoService implements PropertyApiService {
     }
 
     @Override
-    public Property getPropertyInfo(String listingKey) {
-        //TODO handle errors
+    public Property getPropertyInfo(@NonNull String listingKey) {
+        //TODO handle webclient errors
         String query = new QueryBuilder().generateSinglePropertyQuery(listingKey);
         Property property = webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/Property" + query)

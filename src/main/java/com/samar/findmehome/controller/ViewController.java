@@ -49,13 +49,21 @@ public class ViewController {
     }
 
     @GetMapping("/property")
-    public String getPropertyDetails(@RequestParam("key") String listingKey, Model model) {
-        model.addAttribute("property", service.getPropertyInfo(listingKey));
+    public String getPropertyDetails(@RequestParam(value = "key") String listingKey, Model model) {
+        if(listingKey != null) {
+            model.addAttribute("property", service.getPropertyInfo(listingKey));
+        }
+        else{
+            model.addAttribute("error", "Invalid input!");
+        }
         return "property";
     }
 
     private boolean isValid(SearchCriteria criteria) {
-        if (!isValidZipCode(criteria.getLocation())) {
+        if(criteria==null){
+            return false;
+        }
+        if (criteria.getLocation()==null || !isValidZipCode(criteria.getLocation())) {
             return false;
         }
         if (criteria.getPageNumber() == null || criteria.getNumberOfListingInAPage() == null) {
@@ -90,17 +98,14 @@ public class ViewController {
         }
         for (int i = 0; i < pattern.length(); i++) {
             char c = zipCode.charAt(i);
-            switch (pattern.charAt(i)) {
-                case '#':
-                    if (!Character.isDigit(c)) {
-                        return false;
-                    }
-                    break;
-
-                default:
-                    if (c != pattern.charAt(i)) {
-                        return false;
-                    }
+            if (pattern.charAt(i) == '#') {
+                if (!Character.isDigit(c)) {
+                    return false;
+                }
+            } else {
+                if (c != pattern.charAt(i)) {
+                    return false;
+                }
             }
         }
         return true;
