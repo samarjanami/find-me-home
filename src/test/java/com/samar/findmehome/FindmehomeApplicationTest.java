@@ -47,7 +47,7 @@ public class FindmehomeApplicationTest {
         response.setCount(1);
 
         when(service.getPropertiesResponse( any())).thenReturn(response);
-        this.mockMvc.perform(post("/search").param("location", "953")
+        this.mockMvc.perform(post("/search").param("location", "95314")
                 .param("numberOfListingInAPage", "9").param("pageNumber", "0"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("search")))

@@ -69,11 +69,15 @@ public class ViewController {
         if (criteria.getPageNumber() == null || criteria.getNumberOfListingInAPage() == null) {
             return false;
         }
-        if (criteria.getMinBed() < 0 || criteria.getMinBed() > 5) {
-            return false;
+        if(criteria.getMinBed() != null) {
+            if (criteria.getMinBed() < 0 || criteria.getMinBed() > 5) {
+                return false;
+            }
         }
-        if (criteria.getMinBath() < 0 || criteria.getMinBath() > 5) {
-            return false;
+        if(criteria.getMinBath() != null) {
+            if (criteria.getMinBath() < 0 || criteria.getMinBath() > 5) {
+                return false;
+            }
         }
         return true;
     }
