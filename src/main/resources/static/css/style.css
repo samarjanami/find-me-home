@@ -7482,7 +7482,7 @@ h1, h2, h3, h4, h5,
     .properties .text .one {
       width: calc(100% - 80px); }
     .properties .text .two {
-      width: 80px;
+      width: 90px;
       padding-left: 20px; }
       .properties .text .two .price {
         font-weight: 400;

@@ -18,6 +18,14 @@ public class Media {
     @JsonProperty("ShortDescription")
     private String shortDescription;
 
+    public Media() {
+    }
+
+    public Media(String mediaUrl, String shortDescription) {
+        this.mediaUrl = mediaUrl;
+        this.shortDescription = shortDescription;
+    }
+
     public int getOrder() {
         return order;
     }
