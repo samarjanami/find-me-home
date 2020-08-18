@@ -15,7 +15,7 @@ public class Property {
     @JsonProperty("StateOrProvince")
     private String state;
     @JsonProperty("PostalCode")
-    private int postalCode;
+    private String postalCode;
     @JsonProperty("UnparsedAddress")
     private String address;
     @JsonProperty("ListPrice")
@@ -42,7 +42,7 @@ public class Property {
     private List<Media> pictures;
 
     public Property(){}
-    public Property(String city, String state, int postalCode, String address, int price, int numberOfBedrooms, int numberOfBathrooms, String propertyType, String description, int floorArea, int lotArea, List<Media> pictures, int numberOfParking, int yearBuilt) {
+    public Property(String city, String state, String postalCode, String address, int price, int numberOfBedrooms, int numberOfBathrooms, String propertyType, String description, int floorArea, int lotArea, List<Media> pictures, int numberOfParking, int yearBuilt) {
         this.state = state;
         this.city = city;
         this.postalCode = postalCode;
@@ -96,11 +96,11 @@ public class Property {
         this.state = state;
     }
 
-    public int getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(int postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 

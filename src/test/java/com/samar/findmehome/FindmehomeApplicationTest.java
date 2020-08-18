@@ -37,7 +37,7 @@ public class FindmehomeApplicationTest {
     @Test
     public void getSearchResultsSetTheModelWithPropertyListAndReturnsSearchPage() throws Exception{
         List<Property> propertyList = new ArrayList<>();
-        propertyList.add(new Property("los angeles", "california", 90025,
+        propertyList.add(new Property("los angeles", "california", "90025",
                 "12 30th st, some address",280000, 2, 1,
                 "condo", "this is the short description", 1200,
                 1550, Collections.singletonList(new Media()), 1, 1960));
