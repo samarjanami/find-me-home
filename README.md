@@ -8,9 +8,11 @@ Make sure to replace [RESO Web API](https://bridgedataoutput.com/docs/platform/A
 server.token =[---Replace server token here---]
 ```
 ## Demo Application
-Visit [find-me-home](https://find-me-home.herokuapp.com/) for live demo of the application. Since a test API is used for the demo app, very limited property information is available. Here are some search criteria that will return some results:
+Visit [find-me-home](https://find-me-home.herokuapp.com/) for live demo of the application. Since a test API (RESO / Austin Board of Realtors Developers Reference Server) is used for the demo app, only listings that were sold in the Austin market over a year ago are available. Please note that since these were actual listings, the photos are blurred out. Here are some search criteria that will return some results:
 
-ZipCode : 10332 or 10308
+ZipCode: 78654, Min-Beds: 4, Min-Bathroom: 3
+
+ZipCode: 78623, Min-Price: $300,000
 
 ## Tools and Technologies
 Java, Maven, Spring Boot, Spring MVC, ThymeLeaf, HTML, CSS, JavaScript, JQuery, AJAX  
