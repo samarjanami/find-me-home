@@ -217,7 +217,6 @@
                                 <span class="price" th:text="'$' + ${#numbers.formatDecimal(property.price, 0, 'COMMA', 0, 'POINT')}" ></span>
                             </div>
                         </div>
-<!--                        <p th:text="${property.pictures[0].shortDescription}"></p>-->
                         <hr>
                         <p class="bottom-area d-flex">
                             <span>
@@ -252,7 +251,7 @@
                             <a th:href="@{${searchCriteria} + ${criteria.pageNumber-1} }">&lt;</a></li>
                         <th:block th:each="i: ${#numbers.sequence(beginIndex, endIndex)}">
                             <li th:if="${i == criteria.pageNumber}" class="active">
-                                <a href="" th:text="${i}"></a></li>
+                                <a th:text="${i}"></a></li>
                             <li th:unless="${i == criteria.pageNumber}">
                                 <a th:href="@{${searchCriteria} + ${i} }" th:text="${i}"></a></li>
                         </th:block>
